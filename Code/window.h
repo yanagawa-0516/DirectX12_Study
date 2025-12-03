@@ -18,6 +18,7 @@ private:
 	RECT rect;  //ウインドウのサイズを持つ構造体
 	HWND handle;  //ウインドウハンドル
 
-	static LRESULT WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);  //ウインドウプロシージャ
+	static LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);  //ウインドウプロシージャ
 	void SetWindow();  //ウインドウ情報のセット、生成
 };
+
