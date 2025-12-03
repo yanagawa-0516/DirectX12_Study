@@ -41,7 +41,7 @@ void Window::SetWindow() {
 	window.hInstance = GetModuleHandle(0);  //インスタンスハンドルの指定
 	window.lpfnWndProc = (WNDPROC)WindowProcedure;  //ウインドウプロシージャのアドレス
 	window.lpszClassName = _T("DirectX12");   //登録時のクラス名
-	window.lpszMenuName = _T("DX12 SAMPLE");  //タイトルメニューの設定
+	window.lpszMenuName = NULL;  //タイトルメニューの設定
 	window.style = CS_HREDRAW | CS_VREDRAW;   //ウインドウスタイル
 
 	//ウインドウの登録
@@ -59,7 +59,7 @@ void Window::SetWindow() {
 	//ウインドウ生成
 	handle = CreateWindow(
 		window.lpszClassName,
-		_T("DX12 TEST"),
+		_T("DX12 SAMPLE"),
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -72,3 +72,4 @@ void Window::SetWindow() {
 	);
 
 }
+
