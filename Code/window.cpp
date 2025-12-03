@@ -1,62 +1,62 @@
 #include "window.h"
 #include <tchar.h>
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Window::Window() {
 	SetWindow();
 }
 
-//ƒfƒXƒgƒ‰ƒNƒ^
+//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Window::~Window() {
-	//ƒEƒCƒ“ƒhƒE‚Ì‰ð•ú
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è§£æ”¾
 	UnregisterClass(window.lpszClassName, window.hInstance);
 }
 
-//ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹‚ÌŽæ“¾
+//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«ã®å–å¾—
 HWND Window::get() const {
 	return handle;
 }
 
-//ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
-LRESULT Window::WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
-	//ƒEƒCƒ“ƒhƒE‚ª”jŠü‚³‚ê‚½ê‡‚ÍƒAƒvƒŠƒP[ƒVƒ‡ƒ“I—¹‚ðOS‚É“`‚¦‚é
+//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
+LRESULT CALLBACK Window::WindowProcedure(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒç ´æ£„ã•ã‚ŒãŸå ´åˆã¯ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†ã‚’OSã«ä¼ãˆã‚‹
 	if (msg == WM_DESTROY) {
 		PostQuitMessage(0);
 		return 0;
 	}
 
-	//‰½‚à‚È‚¢ê‡‚ÍŠù’è‚Ìˆ—‚ðs‚¤
+	//ä½•ã‚‚ãªã„å ´åˆã¯æ—¢å®šã®å‡¦ç†ã‚’è¡Œã†
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-//ƒEƒCƒ“ƒhƒEî•ñ‚ÌƒZƒbƒgA¶¬
+//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦æƒ…å ±ã®ã‚»ãƒƒãƒˆã€ç”Ÿæˆ
 void Window::SetWindow() {
-	window.cbSize = sizeof(WNDCLASSEX);  //ƒEƒCƒ“ƒhƒEî•ñ‚ÌƒTƒCƒY(WNDCLASSEX‚ÌƒTƒCƒY)
-	window.cbClsExtra = 0;  //\‘¢‘Ì‘¤‚ÅŠm•Û‚³‚ê‚é—\”õƒƒ‚ƒŠ(Šî–{“I‚É‚Í0)
-	window.cbWndExtra = 0;  //ƒEƒCƒ“ƒhƒE‘¤‚ÅŠm•Û‚³‚ê‚é—\”õƒƒ‚ƒŠ(Šî–{“I‚É‚Í0)
-	window.hbrBackground = CreateSolidBrush(WHITE);  //ƒEƒCƒ“ƒhƒE‚Ì”wŒiF
-	window.hCursor = LoadCursor(NULL, IDC_ARROW);  //ƒJ[ƒ\ƒ‹‚ÌÝ’è
-	window.hIcon = LoadIcon(NULL, IDI_APPLICATION);    //ƒVƒ‡[ƒgƒJƒbƒgƒAƒCƒRƒ“‚ÌÝ’è
-	window.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  //ƒ^ƒCƒgƒ‹ƒo[ƒAƒCƒRƒ“‚ÌÝ’è
-	window.hInstance = GetModuleHandle(0);  //ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹‚ÌŽw’è
-	window.lpfnWndProc = (WNDPROC)WindowProcedure;  //ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚ÌƒAƒhƒŒƒX
-	window.lpszClassName = _T("DirectX12");   //“o˜^Žž‚ÌƒNƒ‰ƒX–¼
-	window.lpszMenuName = _T("DX12 SAMPLE");  //ƒ^ƒCƒgƒ‹ƒƒjƒ…[‚ÌÝ’è
-	window.style = CS_HREDRAW | CS_VREDRAW;   //ƒEƒCƒ“ƒhƒEƒXƒ^ƒCƒ‹
+	window.cbSize = sizeof(WNDCLASSEX);  //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦æƒ…å ±ã®ã‚µã‚¤ã‚º(WNDCLASSEXã®ã‚µã‚¤ã‚º)
+	window.cbClsExtra = 0;  //æ§‹é€ ä½“å´ã§ç¢ºä¿ã•ã‚Œã‚‹äºˆå‚™ãƒ¡ãƒ¢ãƒª(åŸºæœ¬çš„ã«ã¯0)
+	window.cbWndExtra = 0;  //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å´ã§ç¢ºä¿ã•ã‚Œã‚‹äºˆå‚™ãƒ¡ãƒ¢ãƒª(åŸºæœ¬çš„ã«ã¯0)
+	window.hbrBackground = CreateSolidBrush(WHITE);  //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®èƒŒæ™¯è‰²
+	window.hCursor = LoadCursor(NULL, IDC_ARROW);  //ã‚«ãƒ¼ã‚½ãƒ«ã®è¨­å®š
+	window.hIcon = LoadIcon(NULL, IDI_APPLICATION);    //ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚¢ã‚¤ã‚³ãƒ³ã®è¨­å®š
+	window.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  //ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã‚¢ã‚¤ã‚³ãƒ³ã®è¨­å®š
+	window.hInstance = GetModuleHandle(0);  //ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«ã®æŒ‡å®š
+	window.lpfnWndProc = (WNDPROC)WindowProcedure;  //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+	window.lpszClassName = _T("DirectX12");   //ç™»éŒ²æ™‚ã®ã‚¯ãƒ©ã‚¹å
+	window.lpszMenuName = _T("DX12 SAMPLE");  //ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®è¨­å®š
+	window.style = CS_HREDRAW | CS_VREDRAW;   //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«
 
-	//ƒEƒCƒ“ƒhƒE‚Ì“o˜^
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç™»éŒ²
 	RegisterClassEx(&window);
 
-	//ƒEƒCƒ“ƒhƒEƒTƒCƒY‚ÌÝ’è
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã®è¨­å®š
 	rect.left = 0;
-	rect.right = WINDOW_WIDTH;    //‰¡•
+	rect.right = WINDOW_WIDTH;    //æ¨ªå¹…
 	rect.top = 0;
-	rect.bottom = WINDOW_HEIGHT;  //c•
+	rect.bottom = WINDOW_HEIGHT;  //ç¸¦å¹…
 
-	//ƒTƒCƒY‚Ì•â³
+	//ã‚µã‚¤ã‚ºã®è£œæ­£
 	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 	
-	//ƒEƒCƒ“ƒhƒE¶¬
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç”Ÿæˆ
 	handle = CreateWindow(
 		window.lpszClassName,
 		_T("DX12 TEST"),
@@ -70,4 +70,5 @@ void Window::SetWindow() {
 		window.hInstance,
 		nullptr
 	);
+
 }
