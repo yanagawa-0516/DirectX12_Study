@@ -1,21 +1,22 @@
 #include "window.h"
 
-int main() {
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 	Window* win = new Window();
-	MSG msg = {};  //ƒƒbƒZ[ƒW‚ğŠi”[‚·‚é\‘¢‘Ì
+	MSG msg = {};  //ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“
 
-	//ƒEƒCƒ“ƒhƒE•\¦
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦è¡¨ç¤º
 	ShowWindow(win->get(), SW_SHOW);
 
 	while (msg.message != WM_QUIT) {
-		//‘—M‚³‚ê‚½ƒƒbƒZ[ƒW‚ğæ“¾
+		//é€ä¿¡ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-			TranslateMessage(&msg);  //•¶šƒƒbƒZ[ƒW‚É•ÏŠ·
-			DispatchMessage(&msg);   //ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚ÉƒƒbƒZ[ƒW‚ğ‘—M
+			TranslateMessage(&msg);  //æ–‡å­—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«å¤‰æ›
+			DispatchMessage(&msg);   //ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡
 		}
 	}
 
 	delete win;
 
 	return 0;
+
 }
